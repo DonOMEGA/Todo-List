@@ -1,0 +1,22 @@
+<h3>To Do</h3>
+
+<!-- for printing form on the webpage -->
+<form method="POST" action="/"><!-- POST method creates anything according to info supplied to it, look in views.py for its info -->
+    {% csrf_token %}
+    {{form.title}}
+    <input type="submit" name="Create Task">
+</form>
+
+<!-- for printing all the information present in models through admin panel, Check views for code -->
+{% for task in tasks %}
+    <div>
+        <a href="{% url 'updateTask' task.id %}">Update</a>
+        <a href="{% url 'delete' task.id %}">Delete</a>
+
+        {% if task.complete == True %} <!-- complete is the model in models.py file -->
+        <strike>{{task}}</strike>
+        {% else %}
+        <span>{{task}}</span>
+        {% endif %}
+    </div>
+{% endfor %}
